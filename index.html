@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Manager Appreciation Portal v2.0</title>
+  <style>
+    body {
+      background-color: #020617;
+      color: #22c55e;
+      font-family: monospace;
+      padding: 40px;
+    }
+
+    .terminal {
+      max-width: 700px;
+      margin: auto;
+      border: 2px solid #22c55e;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #22c55e33;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #22c55e;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .line {
+      margin: 8px 0;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="terminal">
+  <h2>💻 Manager Appreciation System</h2>
+  <div id="output"></div>
+  <button onclick="startProcess()">Run System</button>
+</div>
+
+<script>
+const steps = [
+  "Initializing system...",
+  "Checking employee health status... ⚠️ Sick detected",
+  "Triggering manager support protocol...",
+  "Reducing workload... ✔️",
+  "Continuous check-ins... ✔️",
+  "Boosting morale levels... 📈",
+  "Applying empathy patch v2.0...",
+  "Bug detected: Employee stress ❌",
+  "Fix applied: Manager support ✔️",
+  "System stabilizing...",
+  "Almost done..."
+];
+
+function startProcess() {
+  document.querySelector("button").style.display = "none";
+  let i = 0;
+  const output = document.getElementById("output");
+
+  const interval = setInterval(() => {
+    if (i < steps.length) {
+      const line = document.createElement("div");
+      line.className = "line";
+      line.textContent = "> " + steps[i];
+      output.appendChild(line);
+      i++;
+      window.scrollTo(0, document.body.scrollHeight);
+    } else {
+      clearInterval(interval);
+      showFinalMessage();
+    }
+  }, 800);
+}
+
+function showFinalMessage() {
+  const output = document.getElementById("output");
+
+  const finalHTML = `
+    <br>
+    <div class="line">✅ Execution Successful</div>
+    <div class="line">-----------------------------------</div>
+    <div class="line"><strong>Output:</strong></div>
+    <div class="line">Thank you for being such an incredible manager.</div>
+    <div class="line">Your support while I was unwell made a huge difference.</div>
+    <div class="line">You didn’t just manage work—you made things easier for me as a person.</div>
+    <div class="line">-----------------------------------</div>
+    <div class="line">System Status: Forever Grateful 💚</div>
+  `;
+
+  output.innerHTML += finalHTML;
+
+  launchConfetti();
+}
+
+// Simple confetti 🎉
+function launchConfetti() {
+  for (let i = 0; i < 80; i++) {
+    let confetti = document.createElement("div");
+    confetti.style.position = "fixed";
+    confetti.style.width = "6px";
+    confetti.style.height = "6px";
+    confetti.style.background = "#22c55e";
+    confetti.style.top = "0px";
+    confetti.style.left = Math.random() * window.innerWidth + "px";
+    confetti.style.opacity = Math.random();
+
+    document.body.appendChild(confetti);
+
+    let fall = setInterval(() => {
+      let top = parseInt(confetti.style.top);
+      confetti.style.top = top + 5 + "px";
+
+      if (top > window.innerHeight) {
+        clearInterval(fall);
+        confetti.remove();
+      }
+    }, 20);
+  }
+}
+</script>
+
+</body>
+</html>
